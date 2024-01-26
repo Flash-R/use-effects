@@ -1,4 +1,4 @@
-import React, {useState} from "react"
+import React, {useState,useEffect} from "react"
 
 const countries = [
     "Afghanistan", "Albania", "Algeria", "Andorra", "Angola", "Antigua and Barbuda", "Argentina", "Armenia", "Australia", "Austria",
@@ -27,17 +27,24 @@ const LiveSearching = ()=>{
     const [search, setSearch] = useState("");
     const [searchedCountry, setSearchedCountry] = useState(countries);
 
+    
+    
     function filtered(){
         setSearchedCountry(countries.filter(country => country.toLowerCase().includes(search.toLowerCase().trim())))
     }
-    console.log(search);
+
+    useEffect(()=>{
+        filtered();
+    },[search])
+
+    // console.log(search);
     return (
         <div>
             <input type="text" placeholder="Search Country" 
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             />
-            <button onClick={filtered}>Search</button>
+            {/* <button onClick={filtered}>Search</button> */}
 
             <ul>
                 {
